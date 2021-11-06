@@ -1,4 +1,4 @@
-# Install & set up postgres
+# Install & set up Postgres database server
 
 ## Install
 
@@ -8,17 +8,17 @@ sudo apt full-upgrade
 sudo apt install postgresql
 ```
 
-## Run as postgres user. Can create a new user as well here
+## Run as `postgres` user. Can create a new user as well here
 
-Switch to postgres user with appropriate role to manage the database server.
+Switch to `postgres` user with appropriate role to manage the database server.
 
 `sudo su postgres`
 
-Create another user with the rights to manage the db.
+Create another user with the rights to manage the db if you need.
 
 `createuser pi -P --interactive`
 
-This enters to the postgres management
+This enters to the Postgres' management
 
 `psql`
 
@@ -74,13 +74,37 @@ For Postgres server to accept the connections from other machines file is to be 
 host    all             all             samehost                md5
 host    database1          all             samenet              md5
 host    database2             all          192.168.1.22/24      md5
+host    all             all             0.0.0.0/0            md5
 ```
-Line 1 will allow connections from the **same host** to **all databases** with username and password.
-Line 2 will allow connections to the **database1** from the **same network** as Postgres server with username and password.
-Line 3 will allow connections to the **database2** from the **host 192.168.1.22** with username and password.
+Line 1 will allow connections from the **same host** to **all databases** using username and password.
+Line 2 will allow connections to the **database1** from the **same network** as Postgres server using username and password.
+Line 3 will allow connections to the **database2** from the **host 192.168.1.22** using username and password.
+Line 4 will allow connections to **all** databases **from any** host (0.0.0.0/0) using username and password.
 
 ## Authentication methods
 
 - `trust` - anyone who can connect to the server is authorized to access the database
 - `peer` - use client's operating system user name as database user name to access it.
 - `md5` - password-based authentication
+
+## Applying the settings
+
+Postgres should be restarted for the settings in `pg_hba.conf`.
+
+```bash
+sudo service postgresql restart
+```
+
+## Updating `postgresql.conf`
+
+Add as last line:
+
+```bash
+listen_addresses = '*'
+```
+
+## Official page
+
+https://www.postgresql.org/docs/9.1/auth-methods.html
+
+
