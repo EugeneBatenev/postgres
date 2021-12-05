@@ -22,5 +22,19 @@ sudo apt-get install postgresql-client-12
 
 [Check the source just in case](https://www.postgresql.org/download/linux/ubuntu/)
 
+## Making the backup (dump)
 
+### pg_dump tool
 
+What do we need:
+
+- database server's IP address `${IP_ADDR}`
+- database application port `${IP_PORT}`
+- database username `${DB_USERNAME}`
+- database name `${DB_NAME}`
+
+```bash
+pg_dump -h ${IP_ADDR} -p ${IP_PORT} -Fc -U ${DB_USERNAME} ${DB_NAME} -f report_db.sql
+```
+
+`-Fc` - this key is to create custom format. Output a custom-format archive suitable for input into pg_restore. [see here](https://www.postgresql.org/docs/12/app-pgdump.**html**) 
