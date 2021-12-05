@@ -8,6 +8,19 @@ sudo apt full-upgrade
 sudo apt install postgresql
 ```
 
+### Alternative installation from Postgresql repos
+
+```bash
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+
+# Only if you need full Postgresql installation
+sudo apt-get -y install postgresql
+```
+
+[Source](https://www.postgresql.org/download/linux/ubuntu/)
+
 ## Run as `postgres` user. Can create a new user as well here
 
 Switch to `postgres` user with appropriate role to manage the database server.
