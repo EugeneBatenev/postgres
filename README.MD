@@ -12,14 +12,56 @@ sudo apt install postgresql
 
 ```bash
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
-
-# Only if you need full Postgresql installation
-sudo apt-get -y install postgresql
+sudo apt-get install -y postgresql-15
 ```
 
 [Source](https://www.postgresql.org/download/linux/ubuntu/)
+
+## Check what are the ports used by postgresql
+
+```shell
+sudo netstat -naptu | grep 5432
+# or
+sudo netstat -naptu | grep postgres
+# or
+sudo ss -atnp | grep 5432
+# or
+sudo ss -atp | grep postgres
+```
+
+## Check what are the processes running for postgres
+
+```shell
+ps -aux | grep postgres
+# or
+top -u postgres
+```
+
+### Postgresql services status
+
+```shell
+sudo service postgresql status
+# or
+sudo systemctl status postgresql
+```
+
+## Manage status of postgresql processes
+
+```shell
+# check status
+sudo systemctl status postgresql
+# stop the process
+sudo systemctl stop postgresql
+# start the process
+sudo systemctl start postgresql
+# restart the process
+sudo systemctl restart postgresql
+# reload the process whatever this means
+sudo systemctl reload postgresql```
+
+
 
 ## Run as `postgres` user. Can create a new user as well here
 
