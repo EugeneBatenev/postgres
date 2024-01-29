@@ -59,7 +59,8 @@ sudo systemctl start postgresql
 # restart the process
 sudo systemctl restart postgresql
 # reload the process whatever this means
-sudo systemctl reload postgresql```
+sudo systemctl reload postgresql
+```
 
 
 
