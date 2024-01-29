@@ -62,8 +62,6 @@ sudo systemctl restart postgresql
 sudo systemctl reload postgresql
 ```
 
-
-
 ## Run as `postgres` user. Can create a new user as well here
 
 Switch to `postgres` user with appropriate role to manage the database server.
