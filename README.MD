@@ -11,10 +11,10 @@ sudo apt install postgresql
 ### Alternative installation from Postgresql repos
 
 ```bash
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-sudo wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install -y postgresql-15
+wget -q -O- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor --output /usr/share/keyrings/pgdg.gpg
+echo "deb [signed-by=/usr/share/keyrings/pgdg.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+sudo apt update
+sudo apt install -y postgresql-15
 ```
 
 [Source](https://www.postgresql.org/download/linux/ubuntu/)
